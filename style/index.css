@@ -1,0 +1,25 @@
+#navbar{
+    display: flex;
+    justify-content:end;
+    align-items: center;
+    height: 120px;
+    width: 100%;
+    border:solid 1px black;
+    
+}
+h1{
+    margin-left: 10px;
+    margin-right: 40px;
+}
+#cimg{
+    height:160px;
+    width: 150px;
+}
+#menu{
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: repeat(5,1fr);
+    gap: 40px;
+    width: 80%;
+    margin: auto;
+}

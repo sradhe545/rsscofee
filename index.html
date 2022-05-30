@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="style/index.css">
+  </head>
+
+  <body>
+    <div id="navbar">
+      <!--Add navbar divs here-->
+      <!-- Link to bucket.html -->
+      <h1><a href="">Signup</a></h1>
+      <h1><a href="">Login</a></h1>
+     <h1><a href="">Products</a></h1>
+      <h1><a href="bucket.html">Bucket</a></h1>
+      <div id="coffee_count">
+        <!--Show total number of coffee added to bucket here, do not add anything only Total count. Not even "Count - 5" but like this "5" -->
+      </div>
+    </div>
+
+    <div id="menu">
+      <!--Show coffee list here in grid format-->
+      <!-- add an add to bucket button to each item, give it HTML id as 'add_to_bucket' -->
+    </div>
+  </body>
+</html>
+<script>
+  var arr=JSON.parse(localStorage.getItem("coffee"))|| []
+  myf()
+   async function myf()
+{
+    let url="https://masai-mock-api.herokuapp.com/coffee/menu"
+    console.log(url)
+    let res=await fetch(url)
+    let coffee=await res.json()
+   // append(coffee)
+   // localStorage.setItem("coffee",JSON.stringify(coffee))
+    console.log(coffee.menu.data[0])
+    let c=document.querySelector("#menu")
+    var count=0;
+    for(var i=0;i<coffee.menu.data.length;i++)
+    {
+     
+      let p1=document.createElement("p")
+       p1.innerText=coffee.menu.data[i].title
+       let p2=document.createElement("img")
+       p2.src=coffee.menu.data[i].image
+       p2.setAttribute("id","cimg")
+       let p3=document.createElement("p")
+       p3.innerText=coffee.menu.data[i].price
+       let p4=document.createElement("button")
+       p4.innerText="Add to Bucket"
+      
+       p4.addEventListener("click",function(){
+         alert("Items added in Bucket")
+        var c1=document.createElement("h3")
+        c1.innerHTML=null
+         count++
+         var n=document.querySelector("#coffee_count")
+         c1.innerText=count
+         n.append(c1)
+         arr.push(coffee.menu.data)
+         localStorage.setItem("coffee",JSON.stringify(arr))
+        window.location.href="bucket.html"
+       })
+       
+let lowerdiv=document.createElement("div")
+lowerdiv.setAttribute("id", "lowerdiv")
+
+       lowerdiv.append(p1,p2,p3,p4)
+       c.append(lowerdiv)
+    }
+   return coffee.menu.data
+
+}
+</script>
+<!-- //coffee, image, price and add to bucket button -->
+
